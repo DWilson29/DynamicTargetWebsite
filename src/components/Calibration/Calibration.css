@@ -1,0 +1,105 @@
+.calibration-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.calibration-panel {
+  background: #1e2228;
+  color: #f0f0f0;
+  border-radius: 8px;
+  padding: 24px 28px;
+  width: 90%;
+  max-width: 420px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.calibration-panel h2 {
+  margin-top: 0;
+  font-size: 1.25rem;
+}
+
+.calibration-panel p {
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: #c7c9cc;
+}
+
+.calibration-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.calibration-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.calibration-form input {
+  padding: 8px 10px;
+  border-radius: 4px;
+  border: 1px solid #3a3f47;
+  background: #2a2f37;
+  color: #fff;
+  font-size: 0.95rem;
+}
+
+.calibration-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 8px 14px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.btn-primary {
+  background: #3b82f6;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: #2563eb;
+}
+
+.btn-secondary {
+  background: #3a3f47;
+  color: #fff;
+}
+
+.btn-secondary:hover {
+  background: #4a515c;
+}
+
+.btn-link {
+  background: transparent;
+  color: #9ca3af;
+}
+
+.btn-link:hover {
+  color: #fff;
+}
+
+.calibration-status {
+  margin-top: 16px;
+  font-size: 0.8rem;
+  color: #9ca3af;
+  border-top: 1px solid #3a3f47;
+  padding-top: 12px;
+}

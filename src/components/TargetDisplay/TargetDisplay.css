@@ -1,0 +1,52 @@
+.target-display {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  box-sizing: border-box;
+  background: #e5e7eb;
+  min-height: 100vh;
+}
+
+.target-stage {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.target-box {
+  background: #111318;
+  box-shadow: 0 0 0 2px #000;
+}
+
+.target-warning {
+  color: #b91c1c;
+  font-weight: 600;
+}
+
+.target-info {
+  background: #fff;
+  border-radius: 8px;
+  padding: 16px 20px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+  max-width: 480px;
+  width: 100%;
+  margin-top: 24px;
+}
+
+.target-info h2 {
+  margin: 0 0 8px 0;
+  font-size: 1.05rem;
+}
+
+.target-info ul {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 0.85rem;
+  color: #374151;
+  line-height: 1.6;
+}
