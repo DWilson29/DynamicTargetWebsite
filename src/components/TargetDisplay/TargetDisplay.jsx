@@ -25,7 +25,7 @@ function TargetDisplay({
           target.shape === "image" ? (
             <img
               className="target-box"
-              src={`${process.env.PUBLIC_URL}/${target.image}`}
+              src={`${import.meta.env.BASE_URL}${target.image}`}
               alt={target.name}
               draggable={false}
               style={{ width: `${widthPx}px`, height: `${heightPx}px` }}

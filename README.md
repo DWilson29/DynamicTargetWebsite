@@ -60,6 +60,6 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ```
 npm install
-npm start      # run the dev server at http://localhost:3000
+npm run dev    # run the Vite dev server at http://localhost:3000
 npm run build  # production build
 ```
