@@ -6,8 +6,41 @@
   padding: 24px 20px;
   box-sizing: border-box;
   height: 100vh;
+  overflow-x: hidden;
   overflow-y: auto;
   border-right: 1px solid #2a2f37;
+  transition: width 0.2s, min-width 0.2s;
+}
+
+.sidebar.collapsed {
+  width: 48px;
+  min-width: 48px;
+  padding: 24px 8px;
+}
+
+.sidebar-toggle {
+  display: block;
+  margin: 0 0 16px auto;
+  width: 32px;
+  height: 32px;
+  border: 1px solid #3a3f47;
+  border-radius: 4px;
+  background: #2a2f37;
+  color: #fff;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.sidebar.collapsed .sidebar-toggle {
+  margin: 0 auto 16px;
+}
+
+.sidebar-toggle:hover {
+  background: #3a3f47;
+}
+
+.sidebar-content {
+  min-width: 0;
 }
 
 .sidebar-title {
@@ -41,6 +74,7 @@
   gap: 6px;
   font-size: 0.85rem;
   flex: 1;
+  min-width: 0;
 }
 
 .field span {
@@ -50,6 +84,9 @@
 
 .field select,
 .field input {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
   padding: 8px 10px;
   border-radius: 4px;
   border: 1px solid #3a3f47;

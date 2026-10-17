@@ -15,6 +15,17 @@ export function feetInchesToInches(feet, inches) {
   return f * 12 + i;
 }
 
+export const INCHES_PER_UNIT = { yd: 36, m: 39.37007874015748 };
+
+/**
+ * Convert a distance entered in the chosen unit into inches.
+ * @param {"ftin"|"yd"|"m"} unit
+ */
+export function distanceToInches(unit, feet, inches, value) {
+  if (unit === "ftin") return feetInchesToInches(feet, inches);
+  return (Number(value) || 0) * INCHES_PER_UNIT[unit];
+}
+
 /**
  * Compute the size (in inches) that a target must be displayed at on the
  * monitor so it presents the same apparent (angular) size as the real

@@ -26,6 +26,10 @@ export function getCalibration() {
   }
 }
 
+// Zoom level (devicePixelRatio) when the page loaded; the 96 PPI default
+// is assumed to hold at that zoom.
+const INITIAL_DPR = (typeof window !== "undefined" && window.devicePixelRatio) || 1;
+
 function defaultCalibration() {
   return {
     calibrated: false,
@@ -33,7 +37,21 @@ function defaultCalibration() {
     heightIn: null,
     ppiX: DEFAULT_PPI,
     ppiY: DEFAULT_PPI,
+    devicePpiX: DEFAULT_PPI * INITIAL_DPR,
+    devicePpiY: DEFAULT_PPI * INITIAL_DPR,
   };
+}
+
+/**
+ * Return the CSS-pixel PPI for the current browser zoom, so a physical
+ * size stays constant when the user zooms in/out.
+ */
+export function getEffectivePpi(calibration, dpr) {
+  const z = dpr || 1;
+  const dx = calibration.devicePpiX;
+  const dy = calibration.devicePpiY;
+  if (!dx || !dy) return { ppiX: calibration.ppiX, ppiY: calibration.ppiY };
+  return { ppiX: dx / z, ppiY: dy / z };
 }
 
 /**
@@ -49,12 +67,17 @@ export function saveCalibration(widthIn, heightIn) {
   const ppiX = widthIn > 0 ? screenWidthPx / widthIn : DEFAULT_PPI;
   const ppiY = heightIn > 0 ? screenHeightPx / heightIn : DEFAULT_PPI;
 
+  // Zoom-independent density: physical device pixels per inch.
+  const dpr = window.devicePixelRatio || 1;
+
   const calibration = {
     calibrated: true,
     widthIn,
     heightIn,
     ppiX,
     ppiY,
+    devicePpiX: ppiX * dpr,
+    devicePpiY: ppiY * dpr,
   };
 
   window.localStorage.setItem(STORAGE_KEY, JSON.stringify(calibration));
