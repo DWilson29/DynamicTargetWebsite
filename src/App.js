@@ -3,7 +3,7 @@ import "./App.css";
 import Sidebar from "./components/Sidebar/Sidebar";
 import TargetDisplay from "./components/TargetDisplay/TargetDisplay";
 import Calibration from "./components/Calibration/Calibration";
-import targets from "./data/targets";
+import targets, { DEFAULT_GENERIC_SIZE_IN } from "./data/targets";
 import {
   feetInchesToInches,
   computeDisplaySizeInches,
@@ -25,10 +25,15 @@ function App() {
   const [calibration, setCalibration] = useState(getCalibration());
   const [calibrationOpen, setCalibrationOpen] = useState(false);
 
-  const target = useMemo(
-    () => targets.find((t) => t.id === targetId) || targets[0],
-    [targetId]
-  );
+  const [genericSizeIn, setGenericSizeIn] = useState(DEFAULT_GENERIC_SIZE_IN);
+  const [color, setColor] = useState("black");
+
+  const target = useMemo(() => {
+    const base = targets.find((t) => t.id === targetId) || targets[0];
+    return base.generic
+      ? { ...base, widthIn: genericSizeIn, heightIn: genericSizeIn }
+      : base;
+  }, [targetId, genericSizeIn]);
 
   const simulatedDistanceIn = feetInchesToInches(scaledFeet, scaledInches);
   const actualDistanceIn = feetInchesToInches(actualFeet, actualInches);
@@ -72,11 +77,18 @@ function App() {
         actualInches={actualInches}
         onActualFeetChange={setActualFeet}
         onActualInchesChange={setActualInches}
+        isGeneric={target.generic}
+        sizeIn={genericSizeIn}
+        onSizeChange={setGenericSizeIn}
+        color={color}
+        onColorChange={setColor}
         onOpenCalibration={() => setCalibrationOpen(true)}
+        onResetCalibration={handleClearCalibration}
         calibrated={calibration.calibrated}
       />
       <TargetDisplay
         target={target}
+        color={color}
         displayWidthIn={displayWidthIn}
         displayHeightIn={displayHeightIn}
         widthPx={widthPx}

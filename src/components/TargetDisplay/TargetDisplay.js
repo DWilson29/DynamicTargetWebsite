@@ -7,6 +7,7 @@ import "./TargetDisplay.css";
  */
 function TargetDisplay({
   target,
+  color,
   displayWidthIn,
   displayHeightIn,
   widthPx,
@@ -21,14 +22,29 @@ function TargetDisplay({
     <main className="target-display">
       <div className="target-stage">
         {!tooSmall ? (
-          <div
-            className="target-box"
-            style={{
-              width: `${widthPx}px`,
-              height: `${heightPx}px`,
-            }}
-            title={target.name}
-          />
+          target.shape === "image" ? (
+            <img
+              className="target-box"
+              src={`${process.env.PUBLIC_URL}/${target.image}`}
+              alt={target.name}
+              draggable={false}
+              style={{ width: `${widthPx}px`, height: `${heightPx}px` }}
+            />
+          ) : (
+            <div
+              className="target-box"
+              style={{
+                width: `${widthPx}px`,
+                height: `${heightPx}px`,
+                background: color,
+                borderRadius: target.shape === "circle" ? "50%" : 0,
+                boxShadow: "none",
+                boxSizing: "border-box",
+                border: "2px solid #000",
+              }}
+              title={target.name}
+            />
+          )
         ) : (
           <p className="target-warning">
             Computed target size is too small to render.

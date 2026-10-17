@@ -1,4 +1,5 @@
 import React from "react";
+import { GENERIC_COLORS } from "../../data/targets";
 import "./Sidebar.css";
 
 /**
@@ -20,7 +21,13 @@ function Sidebar({
   actualInches,
   onActualFeetChange,
   onActualInchesChange,
+  isGeneric,
+  sizeIn,
+  onSizeChange,
+  color,
+  onColorChange,
   onOpenCalibration,
+  onResetCalibration,
   calibrated,
 }) {
   return (
@@ -42,6 +49,31 @@ function Sidebar({
             ))}
           </select>
         </label>
+        {isGeneric && (
+          <>
+            <label className="field">
+              <span>Size: {sizeIn} in</span>
+              <input
+                type="range"
+                min="1"
+                max="12"
+                step="1"
+                value={sizeIn}
+                onChange={(e) => onSizeChange(Math.round(Number(e.target.value)))}
+              />
+            </label>
+            <label className="field">
+              <span>Color</span>
+              <select value={color} onChange={(e) => onColorChange(e.target.value)}>
+                {GENERIC_COLORS.map((c) => (
+                  <option key={c} value={c}>
+                    {c.charAt(0).toUpperCase() + c.slice(1)}
+                  </option>
+                ))}
+              </select>
+            </label>
+          </>
+        )}
       </section>
 
       <section className="sidebar-section">
@@ -114,6 +146,14 @@ function Sidebar({
         <button className="btn btn-primary full-width" onClick={onOpenCalibration}>
           {calibrated ? "Recalibrate" : "Calibrate Monitor"}
         </button>
+        {calibrated && (
+          <button
+            className="btn btn-secondary full-width"
+            onClick={onResetCalibration}
+          >
+            Reset to Default (96 PPI)
+          </button>
+        )}
       </section>
     </aside>
   );
